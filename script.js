@@ -41,15 +41,36 @@ addEvents();
 
 
 
+let renderGridSize = document.querySelector('.renderGridsize');
+let button = document.querySelector('.button');
+let eraser = document.querySelector('.eraser');
+let eraserOffbtn = document.querySelector('.eraseroff');
+let eraserOff = true;
 
-let button = document.querySelector('button');
-
-button.addEventListener('click', () => {
+function changeGridSize() {
   let sqrNum = prompt('how many?','');
   if (sqrNum < 1 || sqrNum > 100) {
     return alert('no f u');
   }
   gridContainer.innerHTML = '';
+  renderGridSize.innerText = `${sqrNum} X ${sqrNum}`
   createGrid(sqrNum);
+  addEvents();
+}
+
+button.addEventListener('click', changeGridSize);
+eraser.addEventListener('click', () => {
+  eraserOff = false;
+  let allboxes = document.querySelectorAll('.gridboxes');
+  allboxes.forEach((box) => {
+    
+    box.addEventListener('mouseover', () => {
+      box.classList.remove('hovered')
+      
+    })
+
+  })
+})
+eraserOffbtn.addEventListener('click', () => {
   addEvents();
 })
