@@ -23,7 +23,6 @@ function createGrid(sqrNum) {
   }
 }
 
-
 createGrid(16);
 
 function addEvents() {
@@ -31,21 +30,23 @@ function addEvents() {
   allboxes.forEach((box) => {
   
     box.addEventListener("mouseover", () => {
-        box.classList.add('hovered')
+        box.style.backgroundColor = `black`
+      });
+  
+    });
+}
+function removeEvents() {
+  let allboxes = document.querySelectorAll('.gridboxes');
+  allboxes.forEach((box) => {
+  
+    box.addEventListener("mouseover", () => {
+        box.style.backgroundColor = 'white';
       });
   
     });
 }
 
 addEvents();
-
-
-
-let renderGridSize = document.querySelector('.renderGridsize');
-let button = document.querySelector('.button');
-let eraser = document.querySelector('.eraser');
-let eraserOffbtn = document.querySelector('.eraseroff');
-let eraserOff = true;
 
 function changeGridSize() {
   let sqrNum = prompt('how many?','');
@@ -58,19 +59,69 @@ function changeGridSize() {
   addEvents();
 }
 
+
+let renderGridSize = document.querySelector('.renderGridsize');
+let button = document.querySelector('.button');
+let eraser = document.querySelector('.eraser');
+let PenOn = document.querySelector('.eraseroff');
+let eraserOff = true;
+let eraseAll = document.querySelector('.resetdraw');
+
 button.addEventListener('click', changeGridSize);
+
+
 eraser.addEventListener('click', () => {
-  eraserOff = false;
+  removeEvents();
+})
+PenOn.addEventListener('click', () => {
+  addEvents();
+})
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'p') {
+    addEvents();
+  }
+})
+window.addEventListener('keydown', (event) => {
+  if (event.key === 'e') {
+    removeEvents();
+  }
+})
+
+
+eraseAll.addEventListener('click', () => {
   let allboxes = document.querySelectorAll('.gridboxes');
   allboxes.forEach((box) => {
-    
-    box.addEventListener('mouseover', () => {
-      box.classList.remove('hovered')
-      
-    })
-
+    box.style.backgroundColor = 'white';
   })
 })
-eraserOffbtn.addEventListener('click', () => {
-  addEvents();
+
+let r = document.querySelector(':root');
+let input = document.querySelector('.input');
+
+input.addEventListener('keydown', (event) => {
+
+      if (event.key === 'Enter') {
+        let allboxes = document.querySelectorAll('.gridboxes');
+        allboxes.forEach((box) => {
+          box.addEventListener('mouseover', () => {
+            box.style.backgroundColor = `${input.value}`;
+          })
+        })
+
+}})
+
+
+let rainbow = () => {
+    return "#" + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0').toUpperCase();
+}
+
+let rainbowbtn = document.querySelector('.rainbow');
+
+rainbowbtn.addEventListener('click', () => {
+  let allboxes = document.querySelectorAll('.gridboxes');
+  allboxes.forEach((box) => {
+    box.addEventListener('mouseover',() => {
+      box.style.backgroundColor = `${rainbow()}`;
+    })
+    })
 })

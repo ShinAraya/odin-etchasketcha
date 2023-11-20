@@ -9,10 +9,13 @@
 /* .gridboxes:hover {
  background-color: rgb(58, 54, 54);
 } */
-
-.hovered {
-  background-color: rgb(0, 0, 0);
+:root {
+  --color: black;
 }
+.hovered {
+  background-color: black;
+}
+
 
 /* each singular column */
 .column {
@@ -35,6 +38,10 @@ button {
 }
 h1 {
   text-align: center;
+}
+
+input {
+  height: 50px;
 }
 
 .flexit {
